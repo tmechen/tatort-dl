@@ -1,0 +1,4 @@
+python-dotenv
+youtube_dl
+beautifulsoup4
+tvdb_api_client
