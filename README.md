@@ -1,10 +1,13 @@
 # tatort-dl
-Archivierung von Tatort Folgen aus der Mediathek
-
 Mit diesem Script können die aktuell verfügbaren Tatort Folgen (alle Seiten von https://www.daserste.de/unterhaltung/krimi/tatort/videos/index.html) gesichert werden. Zusätzlich zum Download der Folgen werden sie, sofern möglich, mittels der API von TVDB benannt. Mit entsprechenden Änderungen im Script an den Pfaden kann das Tool natürlich auch für jede andere Serie verwendet werden. Dafür müssen GANZE_FOLGEN_URL sowie TVDB_SERIES_ID entsprechend angepasst werden.
+
 
 ### Disclaimer
 Hierbei handelt es sich keinesfalls um ein 100% stabiles Archivierungstool, die Fehlerbehandlung ist minimal, die Anpassung auf die ARD Mediathek nur sehr eingeschränkt und nicht abgesichert gegen große Änderungen an der Website.
+
+
+### Download Qualität
+In der aktuellen Version sucht der Download die best mögliche Videoqualität bis FullHD. Zur Zeit wird noch keine 4k Version der Folgen von der ARD ausgeliefert.
 
 
 ### .env File
