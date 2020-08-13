@@ -10,6 +10,12 @@ Hierbei handelt es sich keinesfalls um ein 100% stabiles Archivierungstool, die 
 In der aktuellen Version sucht der Download die best mögliche Videoqualität bis FullHD ("best[height<=?1080]"). Zur Zeit wird noch keine 4k Version der Folgen von der ARD ausgeliefert.
 
 
+### Ausführung
+Vor Start des Scripts müssen die Abhängigkeiten aus dem requirements.txt File installiert werden. Dafür `pip install -r requirements.txt` ausführen.  
+Danach kann das Script ausgeführt werden oder als crontab hinterlegt werden. Beispielsweise für eine Ausführung jede Nacht um 23:45h und gesicherten logs:
+`45 23 * * * python3 /tatort-dl.py >> /tatort-dl.log 2>&1`
+
+
 ### .env File
 Zur Ausführung wird ein .env File im gleichen Verzeichnis benötigt.
 In diesem .env File werden relevante Variablen hinterlegt:
