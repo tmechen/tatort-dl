@@ -7,7 +7,7 @@ Hierbei handelt es sich keinesfalls um ein 100% stabiles Archivierungstool, die 
 
 
 ### Download Qualität
-In der aktuellen Version sucht der Download die best mögliche Videoqualität bis FullHD. Zur Zeit wird noch keine 4k Version der Folgen von der ARD ausgeliefert.
+In der aktuellen Version sucht der Download die best mögliche Videoqualität bis FullHD ("best[height<=?1080]"). Zur Zeit wird noch keine 4k Version der Folgen von der ARD ausgeliefert.
 
 
 ### .env File
