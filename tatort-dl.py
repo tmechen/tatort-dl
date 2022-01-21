@@ -1,9 +1,11 @@
 import os
+import re
 import string
 import urllib.request
 from pathlib import Path
 from typing import List, Union
 
+import unicodedata
 import youtube_dl
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv, find_dotenv
@@ -56,7 +58,7 @@ class TatortDl:
                     tvdb_episode_name = episode['episodeName'].translate(
                         {ord(c): None for c in string.whitespace})
                     season_episode = f"s{episode['airedSeason']}e{str(episode['airedEpisodeNumber']).zfill(2)}"
-                    filename = f"{season_episode}_{tvdb_episode_name}"
+                    filename = self.slugify(f"{season_episode}_{tvdb_episode_name}")
                     self.all_episodes[title]["season"] = episode['airedSeason']
                     break
         if filename == "":
@@ -108,6 +110,7 @@ class TatortDl:
             self.get_series_information_for_episode(episode)
 
     def get_episodes_by_series_from_tvdb(self, tvdb_id: Union[str, int]) -> List[dict]:
+        """Get all the episodes for a TV series"""
         base_url = self.tvdb_client._urls["series_episodes"].format(id=tvdb_id)
         full_data = self.tvdb_client._get(base_url)
         data = full_data["data"]
@@ -116,6 +119,23 @@ class TatortDl:
         for page_number in range(2, number_of_pages + 1):
             data += self.tvdb_client._get(url.format(page_number=page_number))["data"]
         return data
+
+    @staticmethod
+    def slugify(value, allow_unicode=False):
+        """
+        Taken from https://github.com/django/django/blob/master/django/utils/text.py
+        Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated
+        dashes to single dashes. Remove characters that aren't alphanumerics,
+        underscores, or hyphens. Convert to lowercase. Also strip leading and
+        trailing whitespace, dashes, and underscores.
+        """
+        val = str(value)
+        if allow_unicode:
+            val = unicodedata.normalize('NFKC', val)
+        else:
+            val = unicodedata.normalize('NFKD', val).encode('ascii', 'ignore').decode('ascii')
+        val = re.sub(r'[^\w\s-]', '', val.lower())
+        return re.sub(r'[-\s]+', '-', val).strip('-_')
 
 
 if __name__ == "__main__":
